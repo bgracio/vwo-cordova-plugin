@@ -6,9 +6,6 @@
     <name>VWO Cordova Plugin</name>
     <description> </description>
     <license>MIT</license>
-    <keywords> </keywords>
-    <repo> </repo>
-    <issue> </issue>
 
     <!-- android -->
     <platform name="android">
@@ -32,7 +29,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <framework src="VWO" type="podspec" spec="~> 2.2"/>
+        <framework src="src/ios/VWO.framework" custom="true" embed="true" />
         <js-module src="www/plugin.js" name="plugin">
             <runs/>
             <clobbers target="VWOCordovaPlugin" />
