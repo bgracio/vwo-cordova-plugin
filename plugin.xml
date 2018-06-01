@@ -10,30 +10,38 @@
     <!-- android -->
     <platform name="android">
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
-        <js-module src="www/plugin.js" name="plugin">
-        <runs/>
-        <clobbers target="VWOCordovaPlugin" />
-      </js-module>
-      <config-file target="res/xml/config.xml" parent="/*">
-        <feature name="VWOCordovaPlugin">
-          <param name="android-package" value="VWOCordovaPlugin" />
-          <param name="onload" value="true" />
-        </feature>
-      </config-file>
-      <config-file target="AndroidManifest.xml" parent="/*">
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      </config-file>
-      <source-file src="src/android/VWOCordovaPlugin.java" target-dir="src/" />
-    </platform>
-
-    <!-- ios -->
-    <platform name="ios">
-        <framework src="src/ios/VWO.framework" custom="true" embed="true" />
+        
         <js-module src="www/plugin.js" name="plugin">
             <runs/>
             <clobbers target="VWOCordovaPlugin" />
         </js-module>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="VWOCordovaPlugin">
+                <param name="android-package" value="VWOCordovaPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+    
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+        
+        <source-file src="src/android/VWOCordovaPlugin.java" target-dir="src/" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <hook type="before_build" src="src/ios/hooks/addEmbeddedRes.js"/>
+
+        <framework src="src/ios/VWO.framework" custom="true" embed="true" />
+        
+        <js-module src="www/plugin.js" name="plugin">
+            <runs/>
+            <clobbers target="VWOCordovaPlugin" />
+        </js-module>
+        
         <config-file target="config.xml" parent="/*">
             <feature name="VWOCordovaPlugin">
                 <param name="ios-package" value="VWOCordovaPlugin" onload="true" />
